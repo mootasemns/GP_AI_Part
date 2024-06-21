@@ -1,0 +1,7 @@
+sites:
+  Google:
+    url: https://petri-art-nutrinodaya.vercel.app
+    num_images: 1000
+  Facebook:
+    url: https://www.facebook.com
+    num_images: 1000

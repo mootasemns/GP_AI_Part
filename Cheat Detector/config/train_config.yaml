@@ -1,0 +1,4 @@
+train:
+  data_dir: processed_data
+  batch_size: 32
+  epochs: 20

@@ -1,0 +1,4 @@
+mlflow:
+  host: "0.0.0.0"  # Replace with "127.0.0.1" to bind to localhost only
+  port: 6000
+  artifact_dir: "mlruns"  # Directory to store experiment artifacts

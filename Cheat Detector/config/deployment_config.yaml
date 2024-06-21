@@ -1,0 +1,8 @@
+DEPLOYMENT:
+  host: 127.0.0.1
+  port: 8000
+  target_website_url : "http://example.com/alert"
+  sshot_delay_time : 5
+HEALTH_CHECK :
+  host : localhost
+  port : 5000

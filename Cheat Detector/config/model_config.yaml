@@ -1,0 +1,4 @@
+MODEL :
+  name: resnet18
+  num_classes: 2
+  model_path : models/best_model.pth
