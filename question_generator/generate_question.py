@@ -71,7 +71,15 @@ class QuestionGeneration:
 
 # Example usage
 if __name__ == "__main__":
-    document = "Apple is looking at buying U.K. startup for $1 billion. San Francisco considers banning sidewalk delivery robots."
+    # document = "Apple is looking at buying U.K. startup for $1 billion. San Francisco considers banning sidewalk delivery robots."
+    document = """After I/O starts, control returns to user program only upon I/O completion
+        Wait instruction idles the CPU until the next interrupt
+        Wait loop (contention for memory access)
+        At most one I/O request is outstanding at a time, no simultaneous I/O processing
+        After I/O starts, control returns to user program without waiting for I/O completion
+        System call – request to the OS to allow user to wait for I/O completion
+        Device-status table contains entry for each I/O device indicating its type, address, and state
+        OS indexes into I/O device table to determine device status and to modify table entry to include interrupt"""
     question_generator = QuestionGeneration()
     questions_dict = question_generator.generate_questions_dict(document)
     
