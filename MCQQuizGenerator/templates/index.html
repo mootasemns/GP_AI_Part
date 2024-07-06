@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MCQ Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .question { margin-bottom: 20px; }
+        .distractors { list-style-type: none; padding: 0; }
+        .distractors li { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h1>MCQ Quiz</h1>
+    <form id="mcq-form">
+        <label for="context">Context:</label><br>
+        <textarea id="context" name="context" rows="10" cols="80"></textarea><br>
+        <label for="method">Method:</label><br>
+        <select id="method" name="method">
+            <option value="Wordnet">Wordnet</option>
+            <option value="Sense2Vec">Sense2Vec</option>
+        </select><br><br>
+        <input type="button" value="Generate MCQ" onclick="generateMCQ()">
+    </form>
+    <div id="mcq-container"></div>
+
+    <script>
+        async function generateMCQ() {
+            const context = document.getElementById("context").value;
+            const method = document.getElementById("method").value;
+
+            const response = await fetch('http://127.0.0.1:8000/generate_mcq', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ context, method }),
+            });
+
+            const questions = await response.json();
+            if (response.ok) {
+                console.log("Response OK ")
+                console.log(`questions ` , questions)
+
+            } else {
+                alert(`Failed to generate MCQ: ${response.statusText}`);
+            }
+        }
+
+
+    </script>
+</body>
+</html>
