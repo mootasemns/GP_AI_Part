@@ -30,6 +30,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 config = load_config()
 
 device = torch.device(config['device'])
@@ -41,7 +42,7 @@ s3v_old_path = current_dir / "imports"  / config['models']['sense2vec_model']
 sense2vec_model = Sense2VecModel(s3v_old_path)
 sentence_transformer_model = SentenceTransformerModel(config['models']['sentence_transformer_model'], device)
 
-@app.post("/generate_mcq")
+@app.post("/generate_mcq/")
 async def generate_mcq(request: MCQRequest):
     context = request.context
     method = request.method
