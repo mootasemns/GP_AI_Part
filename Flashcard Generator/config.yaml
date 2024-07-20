@@ -1,14 +1,24 @@
+term_extraction:
+  num_terms: 5  # Adjust this value as needed
+  model_checkpoint: "t5-small"  # or any other T5 model
+  max_length: 100  # Adjust this value as needed
+  num_beams: 4  # Adjust this value as needed
+
 model:
-  checkpoint: "t5-small"  # or your fine-tuned model checkpoint
+  checkpoint: "t5-small"  # or any other T5 model
 
 preprocessing:
   max_input_length: 512
-  max_target_length: 512
-
-output:
-  tokenized_train_dataset: "./tokenized_train_dataset"
-  tokenized_valid_dataset: "./tokenized_test_dataset"
+  max_target_length: 128
 
 flashcard_generation:
-  num_flashcards: 10
-  fine_tuned_model_directory: "./fine_tuned_model"
+  num_flashcards: 5
+  fine_tuned_model_directory: './fine_tuned_model'
+
+data:
+  train_split: 'train[:80%]'
+  validation_split: 'train[80%:]'
+
+output:
+  tokenized_train_dataset: 'tokenized_train_dataset'
+  tokenized_valid_dataset: 'tokenized_valid_dataset'
