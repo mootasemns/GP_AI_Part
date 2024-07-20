@@ -1,11 +1,11 @@
 term_extraction:
-  num_terms: 5  # Adjust this value as needed
-  model_checkpoint: "t5-small"  # or any other T5 model
-  max_length: 100  # Adjust this value as needed
-  num_beams: 4  # Adjust this value as needed
+  num_terms: 5  
+  model_checkpoint: "t5-small"  
+  max_length: 100  
+  num_beams: 4  
 
 model:
-  checkpoint: "t5-small"  # or any other T5 model
+  checkpoint: "t5-small"  
 
 preprocessing:
   max_input_length: 512
