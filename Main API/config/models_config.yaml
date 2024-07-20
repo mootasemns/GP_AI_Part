@@ -1,0 +1,25 @@
+device: "cuda"  # Use "cpu" if GPU is not available
+
+models:
+  t5_summary_model: "t5-base"
+  t5_question_model: "ramsrigouthamg/t5_squad_v1"
+  sense2vec_model: "s2v_old"
+  sentence_transformer_model: "msmarco-distilbert-base-v3"
+
+inference:
+  model: sshleifer/distilbart-cnn
+  task: summarization
+
+question_generator:
+  num_questions: 3
+  num_options: 3
+  num_beams: 4
+  max_length: 64
+  fine_tuned_model_directory: "question_generator/fine_tuned_model"
+
+
+summarizer:
+  max_len: 512
+  num_beams: 3
+  max_length: 300
+  min_length: 75
