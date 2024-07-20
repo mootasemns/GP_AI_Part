@@ -1,0 +1,14 @@
+model:
+  checkpoint: "t5-small"  # or your fine-tuned model checkpoint
+
+preprocessing:
+  max_input_length: 512
+  max_target_length: 512
+
+output:
+  tokenized_train_dataset: "./tokenized_train_dataset"
+  tokenized_valid_dataset: "./tokenized_test_dataset"
+
+flashcard_generation:
+  num_flashcards: 10
+  fine_tuned_model_directory: "./fine_tuned_model"
