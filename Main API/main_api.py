@@ -14,8 +14,7 @@ from scipy.io.wavfile import write
 import yaml
 import re
 from nltk import sent_tokenize
-from question_generator.extract import QuestionExtractor
-
+from questionGenerator.extract import QuestionExtractor
 # Add the project root to the Python path
 current_dir = Path(__file__).resolve().parent
 sys.path.append(str(current_dir))
@@ -25,6 +24,7 @@ from MCQQuizGenerator.models.summary_model import SummaryModel
 from MCQQuizGenerator.models.question_model import QuestionModel
 from MCQQuizGenerator.models.sense2vec_model import Sense2VecModel
 from MCQQuizGenerator.models.sentence_transformer_model import SentenceTransformerModel
+from FlashcardGenerator import FlashcardGeneration
 from utils import load_config, get_keywords, get_distractors_wordnet, slice_array_wave, split_sentences
 
 # Initialize FastAPI app
@@ -132,7 +132,7 @@ class MCQRequest(BaseModel):
     context: str
     method: str
 
-class TextToSummarize(BaseModel):
+class SummarizeRequest(BaseModel):
     text: str
 
 class QuestionGenerationRequest(BaseModel):
@@ -140,6 +140,10 @@ class QuestionGenerationRequest(BaseModel):
 
 class TextRequest(BaseModel):
     text: str
+
+class FlashCardRequest(BaseModel):
+    text: str
+
 
 # API endpoints
 @app.post("/generate_mcq/")
@@ -254,7 +258,7 @@ async def synthesize_text(text_request: TextRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/summarize/")
-async def summarize_text(text_to_summarize: TextToSummarize):
+async def summarize_text(text_to_summarize: SummarizeRequest):
     try:
         summary = summarizer(text_to_summarize.text, max_length=130, min_length=30, do_sample=False)
         return {"summary": summary[0]['summary_text']}
@@ -271,6 +275,16 @@ async def generate_questions(request: QuestionGenerationRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-if __name__ == '__main__':
+
+@app.post("/generate_flashcards/")
+def generate_flashcards(request: FlashCardRequest):
+    print("Text Recieved for flashcards : " , request.text)
+    flashcard_generator = FlashcardGeneration()
+    flashcards_dict = flashcard_generator.generate_flashcards_dict(request.text)
+    if not flashcards_dict:
+        raise HTTPException(status_code=404, detail="No flashcards generated.")
+    return flashcards_dict
+
+if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

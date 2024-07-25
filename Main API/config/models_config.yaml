@@ -23,3 +23,8 @@ summarizer:
   num_beams: 3
   max_length: 300
   min_length: 75
+
+flashCards : 
+  num_flashcards: 10
+  fine_tuned_model_directory: "FlashcardGenerator/fine_tuned_model"
+  
